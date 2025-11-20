@@ -7,13 +7,68 @@ authors = [
     { name = "Nathaniel Starkman", email = "nstarman@users.noreply.github.com" }
 ]
 requires-python = ">=3.12"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python",
+    "Topic :: Scientific/Engineering",
+    "Typing :: Typed",
+]
 dependencies = [
     "pooch>=1.8.2",
 ]
 
-[project.scripts]
-zootasks-utils = "zootasks_utils:main"
-
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.9.10,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "cz-conventional-gitmoji>=0.6.1",
+    { include-group = "lint" },
+    { include-group = "nox" },
+    { include-group = "test" },
+]
+lint = [
+    "pre-commit>=4.4.0",
+    "pylint>=4.0.3",
+    "ruff>=0.14.5",
+]
+nox = [
+    "nox>=2025.11.12",
+    "nox-uv>=0.6.3",
+]
+test = [
+    "pytest>=9.0.1",
+    "pytest-env>=1.2.0",
+    "pytest-github-actions-annotate-failures>=0.3.0",
+    "sybil[pytest]>=9.2.0",
+]
+
+
+[tool.commitizen]
+name = "cz_gitmoji"
+
+
+[tool.pytest.ini_options]
+addopts = [
+"--showlocals",
+"--strict-config",
+"--strict-markers",
+"-p no:doctest",    # using sybil
+"-ra",
+]
+minversion = "8.3"
+testpaths = ["docs", "README.md", "src/", "tests/"]
+xfail_strict = true
+
+[tool.pytest_env]
+UNXT_ENABLE_RUNTIME_TYPECHECKING = "beartype.beartype"
