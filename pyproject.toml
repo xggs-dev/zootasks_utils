@@ -1,0 +1,17 @@
+[project]
+name = "zootasks-utils"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "nstarman", email = "nstarman@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+zootasks-utils = "zootasks_utils:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
