@@ -1,2 +1,5 @@
-def main() -> None:
-    print("Hello from zootasks-utils!")
+"""Utilities for Zooniverse and Zootasks."""
+
+__all__ = ("data",)
+
+from . import data
